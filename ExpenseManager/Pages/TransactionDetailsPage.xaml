@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ExpenseManager.UIModels;assembly=ExpenseManager.UIModels"
+             x:Class="ExpenseManager.Pages.TransactionDetailsPage"
+             x:DataType="models:TransactionUIModel"
+             Title="Transaction Details">
+
+    <VerticalStackLayout Spacing="10">
+
+        <Border Style="{StaticResource TransactionDetailsStyle}">
+            <VerticalStackLayout Spacing="4">
+                <Label Text="{Binding Category}"
+                       Style="{StaticResource DetailsHeaderSubtitleStyle}" />
+                
+                <Label Text="{Binding Amount}"
+                       Style="{StaticResource DetailsHeaderAmountStyle}" />
+                
+            </VerticalStackLayout>
+        </Border>
+
+        <Border Style="{StaticResource TransactionDetailsStyle}">
+            <Grid RowDefinitions="Auto,Auto,Auto,Auto"
+                  ColumnDefinitions="Auto,*"
+                  RowSpacing="10"
+                  ColumnSpacing="12">
+
+                <Label Text="Type"
+                       Grid.Row="0"
+                       Style="{StaticResource DetailsNameLabelStyle}" />
+                <Label Text="{Binding TransactionTypeText}"
+                       Grid.Row="0"
+                       Grid.Column="1"
+                       Style="{StaticResource DetailsValueLabelStyle}" />
+
+                <Label Text="Date"
+                       Grid.Row="1"
+                       Style="{StaticResource DetailsNameLabelStyle}" />
+                <Label Text="{Binding Date, StringFormat='{0:dd MMM yyyy}'}"
+                       Grid.Row="1"
+                       Grid.Column="1"
+                       Style="{StaticResource DetailsValueLabelStyle}" />
+
+                <Label Text="Category"
+                       Grid.Row="2"
+                       Style="{StaticResource DetailsNameLabelStyle}" />
+                <Label Text="{Binding Category}"
+                       Grid.Row="2"
+                       Grid.Column="1"
+                       Style="{StaticResource DetailsValueLabelStyle}" />
+
+                <Label Text="Description"
+                       Grid.Row="3"
+                       Style="{StaticResource DetailsNameLabelStyle}" />
+                <Label Text="{Binding Description}"
+                       Grid.Row="3"
+                       Grid.Column="1"
+                       Style="{StaticResource DetailsValueLabelStyle}" />
+                
+            </Grid>
+        </Border>
+
+    </VerticalStackLayout>
+</ContentPage>

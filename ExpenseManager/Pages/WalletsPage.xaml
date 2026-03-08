@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pages="clr-namespace:ExpenseManager.Pages"
+             xmlns:models="clr-namespace:ExpenseManager.UIModels;assembly=ExpenseManager.UIModels"
+             xmlns:components="clr-namespace:ExpenseManager.Components"
+             x:Class="ExpenseManager.Pages.WalletsPage"
+             x:DataType="pages:WalletsPage"
+             Title="Wallets">
+
+    <Shell.TitleView>
+        <Label Text="Wallets" 
+               Style="{StaticResource NavTitleStyle}"
+               Margin="0,12,0,0"/>
+        
+    </Shell.TitleView>
+    
+    <CollectionView ItemsSource="{Binding Wallets}"
+                    SelectionMode="Single"
+                    SelectionChanged="WalletSelected">
+        
+        <CollectionView.ItemTemplate>
+            <DataTemplate x:DataType="models:WalletUIModel">
+                <!-- Reusable wallet card component -->
+                <components:WalletCardView />
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+        
+    </CollectionView>
+</ContentPage>

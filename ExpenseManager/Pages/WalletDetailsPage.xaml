@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:ExpenseManager.UIModels;assembly=ExpenseManager.UIModels"
+             xmlns:components="clr-namespace:ExpenseManager.Components"
+             x:Class="ExpenseManager.Pages.WalletDetailsPage"
+             x:DataType="models:WalletUIModel"
+             Title="Wallet Details">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="6">
+            <!-- Reusable wallet card component -->
+            <components:WalletCardView />
+
+            <HorizontalStackLayout>
+                <Border Style="{StaticResource WalletStatBorderStyle}">
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Balance"
+                               Style="{StaticResource WalletStatTitleLabelStyle}" />
+                        <Label Text="{Binding TotalAmountDesc}"
+                               Style="{StaticResource WalletStatValueLabelStyle}" />
+                    </HorizontalStackLayout>
+                </Border>
+
+                <Border Style="{StaticResource WalletStatBorderStyle}">
+                    <HorizontalStackLayout Spacing="6">
+                        <Label Text="Transactions"
+                               Style="{StaticResource WalletStatTitleLabelStyle}" />
+                        <Label Text="{Binding TransactionCountDesc}"
+                               Style="{StaticResource WalletStatValueLabelStyle}" />
+                    </HorizontalStackLayout>
+                </Border>
+            </HorizontalStackLayout>
+
+            <Label Text="All Transactions"
+                   Style="{StaticResource SectionHeaderLabelStyle}" />
+
+            <CollectionView
+                ItemsSource="{Binding Transactions}"
+                SelectionMode="Single"
+                SelectionChanged="TransactionSelected"
+                Margin="0,4,0,0">
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:TransactionUIModel">
+                        <Border Style="{StaticResource TransactionItemBorderStyle}">
+                            <Grid RowDefinitions="Auto,Auto"
+                                  ColumnDefinitions="*,Auto,Auto,Auto"
+                                  RowSpacing="6"
+                                  ColumnSpacing="12">
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="{Binding Description}"
+                                       Style="{StaticResource TransactionDescriptionLabelStyle}" />
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="1"
+                                       Text="{Binding Category}"
+                                       Style="{StaticResource TransactionMetaLabelStyle}" />
+
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       Text="{Binding Amount}"
+                                       Style="{StaticResource TransactionAmountLabelStyle}" />
+
+                                <Label Grid.Row="1"
+                                        Grid.Column="0"
+                                        Grid.ColumnSpan="3"
+                                        Text="{Binding Date, StringFormat='{0:dd MMM yyyy HH:mm}'}"
+                                        Style="{StaticResource TransactionMetaLabelStyle}" />
+
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout HorizontalOptions="Center">
+                        <Label Text="No transactions yet"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+                <CollectionView.Footer>
+                    <BoxView HeightRequest="120" />
+                </CollectionView.Footer>
+                
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

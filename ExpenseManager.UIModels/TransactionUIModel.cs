@@ -43,6 +43,7 @@ namespace ExpenseManager.UIModels
         }
         
         public bool IsExpense => _amount < 0;
+        public string TransactionTypeText => IsExpense ? "Expense" : "Income";
 
         public TransactionUIModel(Guid walletId)
         {
@@ -85,7 +86,7 @@ namespace ExpenseManager.UIModels
                    $"Date: {Date:dd.MM.yyyy HH:mm}\n" +
                    $"Category: {Category}\n" +
                    $"Amount: {Amount}\n" +
-                   $"Type: {(IsExpense ? "Expense" : "Income")}\n" +
+                   $"Type: {TransactionTypeText}\n" +
                    $"Description: {Description}\n";
         }
     }
